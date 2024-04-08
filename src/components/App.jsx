@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import Form from './components/Form'
-import './App.css'
+import Form from './Form'
+import List from './Lists/List'
+import '../styles/App.css'
 
 function App() {
   const [task, setTask] = useState(0)
@@ -24,11 +25,13 @@ function App() {
           <h2>Ajouter vos tâches à effectuées</h2>
           <Form onSubmit={setTask} task={task}/>
         </section>
-        <section>
-
+        <section className="inputContainer">
+          <h3>À Faire</h3>
+          <List tasks={tasks}/>
         </section>
         <section>
-
+          <h3>Fait</h3>
+          <List tasks={tasks}/>
         </section>
       </main>
       <footer>
