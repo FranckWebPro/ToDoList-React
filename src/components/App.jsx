@@ -4,16 +4,9 @@ import List from './Lists/List'
 import '../styles/App.css'
 
 function App() {
-  const [task, setTask] = useState(0)
-  const tasks = [];
-
-  const addTask = () => {
-    setTask(task);
-    const newTaskObject = {};
-    newTaskObject.value = task;
-    newTaskObject.done = false;
-    tasks.push(newTaskObject);
-  }
+  const [todo, setTodo] = useState([]);
+  const [done, setDone] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
   return (
     <>
@@ -23,15 +16,11 @@ function App() {
       <main>
         <section className='inputSection'>
           <h2>Ajouter vos tâches à effectuées</h2>
-          <Form onSubmit={setTask} task={task}/>
-        </section>
-        <section className="inputContainer">
-          <h3>À Faire</h3>
-          <List tasks={tasks}/>
+          <Form setInputValue={setInputValue} inputValue={inputValue} setTodo={setTodo} todo={todo}/>
         </section>
         <section>
-          <h3>Fait</h3>
-          <List tasks={tasks}/>
+          <h3>À Faire</h3>
+          <List setTodo={setTodo} todo={todo} setDone={setDone} done={done}/>
         </section>
       </main>
       <footer>

@@ -1,11 +1,14 @@
 import Item from './Item'
 
-function List({tasks}) {
+function List({todo, setTodo, done, setDone}) {
     return (
         <ul>
-            {tasks.map((task) => {
-                <Item value={task.value}/>
-            })}
+            {todo.map((taskTodo) => (
+                <Item taskTodo={taskTodo}/>
+            ))}
+            {done.map((taskDone) => (
+                <Item taskDone={taskDone}/>
+            ))}
         </ul>
     )
 }
