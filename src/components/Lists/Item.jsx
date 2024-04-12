@@ -1,12 +1,22 @@
-function Item({ taskDone, taskTodo }) {
+import { useState, useEffect } from "react";
+
+function Item({ task }) {
+   
+
     return (
         <>
-        <li>
-            <input
-                type="checkbox"
-                className="taskCheckBox" 
-            /> {taskDone ? taskDone : taskTodo} <img src="src/assets/trash.png" alt="" className="trashContainer" />
-        </li>
+            <li className={checked ? "crossedLine" : ""}>
+                <input
+                    type="checkbox"
+                    defaultChecked={checked}
+                    onChange={handleCheckboxChange}
+                    className="taskCheckBox"
+                /> {task}
+                <div className="iconContainer">
+                    <img src="src/assets/trash.png" alt="" className="trashContainer" onClick={handleClick} />
+                    <img src="src/assets/editer.png" alt="" className="editContainer" />
+                </div>
+            </li>
         </>
     )
 }

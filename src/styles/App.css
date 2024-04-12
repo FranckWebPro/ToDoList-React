@@ -5,7 +5,9 @@
 
 :root {
   --primaryColor: rgb(47, 147, 180);
+  --primaryColorLight: rgba(47, 147, 180, 0.7);
   --secondaryColor: rgb(81, 81, 81);
+  --trashBackground: rgb(154, 39, 39);
   --textColor: rgb(240, 240, 240);
   --glassmorphism: rgba(255, 255, 255, 0.15);
   --pagePadding: 1.5rem;
@@ -41,18 +43,19 @@ header {
 }
 
 main {
-  min-height: 80vh;
+  min-height: 70vh;
   padding: var(--pagePadding);
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
+  align-items: flex-start;
   align-items: center;
   gap: var(--pagePadding);
 }
 
 section {
   width: 100%;
-  height: 100%;
+  height: auto;
   min-height: 250px;
   padding: 2rem .5rem;
   display: flex;
@@ -61,13 +64,16 @@ section {
   align-items: center;
   gap: 1rem;
   border-radius: 20px;
-  box-shadow: 0px 0px 6px 2px var(--glassmorphism);
-  background-color: var(--glassmorphism);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  grid-column: 1 / -1;
 }
 
 section:first-of-type {
-  grid-column: 1 / -1;
   min-height: 100px;
   display: flex;
   justify-content: center;
@@ -117,7 +123,8 @@ label {
   margin: 1rem 0;
   padding: .5rem;
   border: none;
-  background-color: var(--textColor)
+  background-color: var(--textColor);
+  color: var(--secondaryColor)
 }
 
 button {
@@ -145,18 +152,23 @@ li {
   width: 100%;
   line-height: 150%;
   padding: .5rem 1.5rem;
-  display: grid;
-  justify-content: space-around;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   text-align: left;
   grid-template-columns: .5rem auto .5rem;
   gap: .5rem;
-  background-color: var(--primaryColor);
+  background-color: var(--primaryColorLight);
   border-radius: 10px;
 }
 
+.iconContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .trashContainer {
-  height: 100%;
   height: 30px;
   min-width: 30px;
   position: relative;
@@ -166,7 +178,22 @@ li {
   justify-content: center;
   align-items: center;
   margin-left: 1rem;
-  background-color: rgb(154, 39, 39);
+  background-color: var(--trashBackground);
+  border-radius: 5px;
+  padding: .3rem;
+}
+
+.editContainer {
+  height: 30px;
+  min-width: 30px;
+  position: relative;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  background-color: var(--secondaryColor);
   border-radius: 5px;
   padding: .3rem;
 }
@@ -175,10 +202,17 @@ li {
   cursor: pointer;
 }
 
+.editContainer:hover {
+  cursor: pointer;
+}
+
 .taskCheckBox {
-  height: 70%;
-  width: 20px;
-  transform: translateX(-1rem);
+  height: 25px;
+  width: 25px;
+}
+
+.crossedLine {
+  text-decoration-line: line-through;
 }
 
 footer {
@@ -201,18 +235,7 @@ footer {
   }
 
   main {
-    grid-template-rows: repeat(3, 1fr);
     padding: var(--pagePadding) 3rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  section {
-    grid-row: 2 / 4;
-    grid-column: 1 / -1;
-  }
-
-  section:first-of-type {
-    grid-row: 1/2;
   }
 
   form {

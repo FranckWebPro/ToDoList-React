@@ -4,9 +4,23 @@ import List from './Lists/List'
 import '../styles/App.css'
 
 function App() {
-  const [todo, setTodo] = useState([]);
-  const [done, setDone] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [tasks, setTasks] = useState(() => {
+      const savedTasks = localStorage.getItem('tasks');
+      return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
+  // const addTask = () => {
+  //   const newTask = JSON
+  //   setTask()
+  // };
+
+  // const removeTask = () => {
+
+  // };
+
+  // const toggleCompleted = () => {
+
+  // };
 
   return (
     <>
@@ -16,11 +30,11 @@ function App() {
       <main>
         <section className='inputSection'>
           <h2>Ajouter vos tâches à effectuées</h2>
-          <Form setInputValue={setInputValue} inputValue={inputValue} setTodo={setTodo} todo={todo}/>
+          <Form setTasks={setTasks} tasks={tasks}/>
         </section>
         <section>
           <h3>À Faire</h3>
-          <List setTodo={setTodo} todo={todo} setDone={setDone} done={done}/>
+          <List tasks={tasks}/>
         </section>
       </main>
       <footer>

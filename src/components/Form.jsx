@@ -1,13 +1,14 @@
-function Form({ setInputValue, inputValue, todo, setTodo }) {
+import { useState } from "react";
 
-    const handleChange = (event) => {
-        setInputValue(event.target.value);
-    }
+function Form({ setTasks, tasks }) {
+    const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(inputValue);
         if (inputValue !== '') {
-            setTodo([...todo, inputValue]);
+            localStorage.setItem('tasks', JSON.stringify([...tasks, inputValue]));
+            setTasks([...tasks, inputValue]);
             setInputValue('');
         }
     }
@@ -16,10 +17,12 @@ function Form({ setInputValue, inputValue, todo, setTodo }) {
         <form>
             <label htmlFor="newTaskInput">Rentrez vos tâches à effectuées:</label>
             <div className="inputContainer">
-                <input type="text" value={inputValue} id="newTaskInput" onChange={handleChange} placeholder="Rentrez votre tâche" />
+                <input type="text" id="newTaskInput" placeholder="Rentrez votre tâche" />
                 <button
                     type="submit"
-                    onClick={handleSubmit}
+                    value={inputValue}
+                    onChange={event => setInputValue(event.target.value)}
+                    onSubmit={event => handleSubmit(event)}
                 >Ajouter</button>
             </div>
         </form>
