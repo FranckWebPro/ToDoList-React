@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Form from './Form'
-import List from './Lists/List'
+import List from './List'
 import '../styles/App.css'
 
 function App() {

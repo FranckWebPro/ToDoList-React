@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 function Form({ setTasks, tasks }) {
     const [inputValue, setInputValue] = useState('');
@@ -32,3 +33,10 @@ function Form({ setTasks, tasks }) {
 }
 
 export default Form
+
+Form.propTypes = {
+    tasks: PropTypes.arrayOf({
+      task: PropTypes.string,
+    }),
+    setTasks : PropTypes.shape.isRequired
+  }

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Item from './Item'
 
 function List({tasks, setTasks}) {
@@ -14,6 +15,7 @@ function List({tasks, setTasks}) {
             {tasks.map((task, index) => (
                 <Item
                     key={`${task.task}-${index}`}
+                    index={index}
                     task={task}
                     tasks={tasks}
                     setTasks={setTasks}/>
@@ -23,3 +25,10 @@ function List({tasks, setTasks}) {
 }
 
 export default List
+
+List.propTypes = {
+    tasks: PropTypes.arrayOf({
+      task: PropTypes.string,
+    }),
+    setTasks : PropTypes.shape
+  }
