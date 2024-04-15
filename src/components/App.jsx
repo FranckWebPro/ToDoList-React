@@ -9,6 +9,7 @@ function App() {
       return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
+
   // const addTask = () => {
   //   const newTask = JSON
   //   setTask()
@@ -34,7 +35,7 @@ function App() {
         </section>
         <section>
           <h3>À Faire</h3>
-          <List tasks={tasks}/>
+          <List tasks={tasks} setTasks={setTasks}/>
         </section>
       </main>
       <footer>

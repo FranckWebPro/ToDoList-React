@@ -1,6 +1,6 @@
 import Item from './Item'
 
-function List({tasks}) {
+function List({tasks, setTasks}) {
     return (
         <ul>
             {/* {todo.map((taskTodo, index) => (
@@ -12,9 +12,11 @@ function List({tasks}) {
                 done={done}/>
             ))} */}
             {tasks.map((task, index) => (
-                <Item 
-                key={`${task}-${index}`}
-                task={task}/>
+                <Item
+                    key={`${task.task}-${index}`}
+                    task={task}
+                    tasks={tasks}
+                    setTasks={setTasks}/>
             ))}
         </ul>
     )

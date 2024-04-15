@@ -11,6 +11,7 @@
   --textColor: rgb(240, 240, 240);
   --glassmorphism: rgba(255, 255, 255, 0.15);
   --pagePadding: 1.5rem;
+  --inputHeight: clamp(50px, 3vw, 60px);
 }
 
 * {
@@ -118,7 +119,7 @@ label {
 
 #newTaskInput {
   width: 70%;
-  height: clamp(40px, 3vw, 50px);
+  height: var(--inputHeight);
   border-radius: 10px 0 0 10px;
   margin: 1rem 0;
   padding: .5rem;
@@ -129,7 +130,7 @@ label {
 
 button {
   width: 30%;
-  height: clamp(40px, 3vw, 50px);
+  height: var(--inputHeight);
   padding: .5rem 1rem;
   border: none;
   border-radius: 0 10px 10px 0;
@@ -145,11 +146,12 @@ ul {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: .5rem;
+  gap: 1rem;
 }
 
 li {
   width: 100%;
+  height: var(--inputHeight);
   line-height: 150%;
   padding: .5rem 1.5rem;
   display: flex;
@@ -160,6 +162,7 @@ li {
   gap: .5rem;
   background-color: var(--primaryColorLight);
   border-radius: 10px;
+  box-shadow: 4px 4px 6px 2px rgb(48, 48, 48);
 }
 
 .iconContainer {
