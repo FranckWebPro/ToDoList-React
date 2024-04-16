@@ -27,8 +27,9 @@ function List({tasks, setTasks}) {
 export default List
 
 List.propTypes = {
-    tasks: PropTypes.arrayOf({
-      task: PropTypes.string,
-    }),
-    setTasks : PropTypes.shape
+    tasks: PropTypes.arrayOf(PropTypes.shape({
+        task: PropTypes.string.isRequired,
+        done: PropTypes.bool.isRequired
+    })).isRequired,
+    setTasks: PropTypes.func.isRequired
   }

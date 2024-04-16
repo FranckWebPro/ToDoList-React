@@ -1,9 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import Popup from "./Popup";
 
 function Item({ task, tasks, setTasks}) {
-    const [inputValue, setInputValue] = useState('');
     const [checked, setChecked] = useState(task.done);
+    const [modal, setModal] = useState(false);
     const todo = [...tasks];
     const reducedTodo = todo.filter(currentTask => currentTask.task !== task.task);
 
@@ -26,8 +27,7 @@ function Item({ task, tasks, setTasks}) {
     };
 
     const handleEdit = () => {
-        localStorage.setItem('tasks', JSON.stringify(reducedTodo));
-        setTasks(reducedTodo);
+        setModal(true);
     };
 
     return (
@@ -41,23 +41,16 @@ function Item({ task, tasks, setTasks}) {
                 /> {task.task}
                 <div className="iconContainer">
                     <img src="src/assets/trash.png" alt="" className="trashContainer" onClick={handleDelete} />
-                    <img src="src/assets/editer.png" alt="" className="editContainer" onClick={handleEdit}/>
+                    <img src="src/assets/editer.png" alt="" className="editButton" onClick={handleEdit}/>
                 </div>
             </li>
-            <form onSubmit={handleEdit} className="editPopup">
-            <label htmlFor="newTaskInput">Modifier la tâche:</label>
-            <div className="inputContainer">
-                <input 
-                type="text" 
-                id="newTaskInput" 
-                placeholder="Rentrez votre tâche"
-                value={inputValue} 
-                onChange={event => setInputValue(event.target.value)} />
-                <button
-                    type="submit"
-                >Ajouter</button>
-            </div>
-        </form>
+            {modal && <Popup 
+            task={task} 
+            setTasks={setTasks} 
+            setModal={setModal} 
+            modal={modal}
+            reducedTodo={reducedTodo}
+            />}
         </>
     )
 }
@@ -65,10 +58,11 @@ function Item({ task, tasks, setTasks}) {
 export default Item
 
 Item.propTypes = {
-    tasks: PropTypes.shape({
-      task: PropTypes.string,
-    }),
-    task: PropTypes.string,
-    setTasks : PropTypes.shape.isRequired,
+    task: PropTypes.shape({
+        task: PropTypes.string.isRequired,
+        done: PropTypes.bool.isRequired
+    }).isRequired,
+    tasks: PropTypes.array.isRequired,
+    setTasks: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired
-  }
+};

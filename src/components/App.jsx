@@ -9,20 +9,6 @@ function App() {
       return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
-
-  // const addTask = () => {
-  //   const newTask = JSON
-  //   setTask()
-  // };
-
-  // const removeTask = () => {
-
-  // };
-
-  // const toggleCompleted = () => {
-
-  // };
-
   return (
     <>
       <header>
