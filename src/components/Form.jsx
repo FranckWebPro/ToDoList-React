@@ -35,8 +35,6 @@ function Form({ setTasks, tasks }) {
 export default Form
 
 Form.propTypes = {
-    tasks: PropTypes.arrayOf({
-      task: PropTypes.string,
-    }),
-    setTasks : PropTypes.shape.isRequired
+    tasks: PropTypes.array.isRequired,
+    setTasks : PropTypes.func.isRequired
   }

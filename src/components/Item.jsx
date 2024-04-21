@@ -1,12 +1,13 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import Popup from "./Popup";
+import Popup from './Popup';
+import useModal from "./UseModal";
 
 function Item({ task, tasks, setTasks}) {
     const [checked, setChecked] = useState(task.done);
-    const [modal, setModal] = useState(false);
     const todo = [...tasks];
     const reducedTodo = todo.filter(currentTask => currentTask.task !== task.task);
+    const [isShowingModal, toggleModal] = useModal();
 
     const handleCheckboxChange = () => {
         if (checked) {
@@ -26,10 +27,6 @@ function Item({ task, tasks, setTasks}) {
         setTasks(reducedTodo);
     };
 
-    const handleEdit = () => {
-        setModal(true);
-    };
-
     return (
         <>
             <li className={checked ? "crossedLine" : ""}>
@@ -41,14 +38,16 @@ function Item({ task, tasks, setTasks}) {
                 /> {task.task}
                 <div className="iconContainer">
                     <img src="src/assets/trash.png" alt="" className="trashContainer" onClick={handleDelete} />
-                    <img src="src/assets/editer.png" alt="" className="editButton" onClick={handleEdit}/>
+                    <img src="src/assets/editer.png" alt="" className="editButton" onClick={toggleModal}/>
                 </div>
             </li>
-            {modal && <Popup 
-            task={task} 
-            setTasks={setTasks} 
-            setModal={setModal} 
-            modal={modal}
+            {isShowingModal && 
+            <Popup 
+            isShowingModal={isShowingModal} 
+            toggleModal={toggleModal} 
+            setTasks={setTasks}
+            tasks={tasks} 
+            task={task}
             reducedTodo={reducedTodo}
             />}
         </>

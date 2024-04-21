@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import ReactDOM from 'react-dom';
 
-function Popup( task, setTasks, setModal, reducedTodo) {
+function Popup({task, setTasks, toggleModal, reducedTodo}) {
     const [editValue, setEditValue] = useState(task.task);
     
     const handleSubmit = (event) => {
@@ -11,9 +12,9 @@ function Popup( task, setTasks, setModal, reducedTodo) {
         setTasks(updatedTodo);
     }
 
-    return (
-        <div className="popupContainer">
-            <form onSubmit={handleSubmit} className="popupBody">
+    return ReactDOM.createPortal (
+        <div className="popupContainer" onClick={toggleModal}>
+            <form onSubmit={handleSubmit} className="popupBody" onClick={e => e.stopPropagation()}>
                 <label htmlFor="editInput">Modifier la tâche:</label>
                 <div className="editContainer">
                     <input 
@@ -22,14 +23,15 @@ function Popup( task, setTasks, setModal, reducedTodo) {
                     placeholder="Rentrez votre tâche"
                     value={editValue} 
                     onChange={event => setEditValue(event.target.value)} />
-                    <button type="button" onClick={() => setModal(false)}>Annuler</button>
+                    <button type="button" onClick={toggleModal}>Annuler</button>
                     <button
                         type="submit"
                     >Ajouter</button>
                 </div>
             </form>
-        </div>
-    )
+        </div>,
+        document.body
+    );
 }
 
 export default Popup;
@@ -40,7 +42,7 @@ export default Popup;
         done: PropTypes.bool.isRequired
     }).isRequired,
     setTasks: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired,
+    toggleModal: PropTypes.func.isRequired,
     reducedTodo: PropTypes.arrayOf(PropTypes.shape({
         task: PropTypes.string.isRequired,
         done: PropTypes.bool.isRequired
