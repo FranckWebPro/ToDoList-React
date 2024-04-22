@@ -9,7 +9,6 @@ function App() {
       return savedTasks ? JSON.parse(savedTasks) : [];
   });
 
-
   return (
     <>
       <header>
@@ -21,7 +20,7 @@ function App() {
           <Form setTasks={setTasks} tasks={tasks}/>
         </section>
         <section>
-          <h3>À Faire</h3>
+          <h2>À Faire</h2>
           <List tasks={tasks} setTasks={setTasks}/>
         </section>
       </main>

@@ -6,7 +6,6 @@ function Form({ setTasks, tasks }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(inputValue);
         if (inputValue !== '') {
             localStorage.setItem('tasks', JSON.stringify([{task : inputValue, done : false}, ...tasks]));
             setTasks([{task : inputValue, done : false}, ...tasks]);

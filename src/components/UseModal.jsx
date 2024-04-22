@@ -8,7 +8,6 @@ const useModal = () => {
         setIsShowing(!isShowing);
     }
 
-    console.log("oh"  + isShowing)
     return [
         isShowing,
         toggle
